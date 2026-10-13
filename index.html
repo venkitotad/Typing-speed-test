@@ -3,342 +3,133 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link
-    rel="icon"
-    type="image/png"
-    sizes="32x32"
-    href="./assets/images/favicon-32x32.png"
-  >
-
+  <meta name="theme-color" content="#121212">
+  <meta name="description" content="Practice your typing speed with random passages, difficulty levels, live WPM, accuracy, and personal-best tracking.">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   <link rel="stylesheet" href="./style.css">
-
-  <title>Frontend Mentor | Typing Speed Test</title>
+  <title>Typing Speed Test</title>
 </head>
-
 <body>
-
   <main class="app">
-
-    <!-- Header -->
     <header class="header">
-
-    <div class="brand">
-    <picture>
-        <source
-            media="(max-width: 767px)"
-            srcset="./assets/images/logo-small.svg"
-        >
-
-        <img
-            src="./assets/images/logo-large.svg"
-            alt="Typing Speed Test"
-        >
-    </picture>
-</div>
-
-      <div class="personal-best">
-        <span class="trophy" aria-hidden="true">🏆</span>
-
-        <span>
-          Personal best:
-          <strong id="personal-best">0 WPM</strong>
-        </span>
+      <div class="brand">
+        <picture>
+          <source media="(max-width: 767px)" srcset="./assets/images/logo-small.svg">
+          <img src="./assets/images/logo-large.svg" alt="Typing Speed Test">
+        </picture>
       </div>
 
+      <div class="personal-best" aria-live="polite">
+        <span class="trophy" aria-hidden="true">🏆</span>
+        <span>Personal best: <strong id="personal-best">0 WPM</strong></span>
+      </div>
     </header>
 
-
-    <!-- Test information -->
-    <section class="test-info">
-
-      <!-- Statistics -->
+    <section class="test-info" aria-label="Test statistics and settings">
       <div class="stats">
-
         <div class="stat">
           <span class="stat-label">WPM:</span>
           <strong id="wpm">0</strong>
         </div>
-
         <div class="stat">
           <span class="stat-label">Accuracy:</span>
           <strong id="accuracy">100%</strong>
         </div>
-
         <div class="stat">
           <span class="stat-label">Time:</span>
           <strong id="time">0:60</strong>
         </div>
-
       </div>
 
-
-      <!-- Controls -->
       <div class="controls">
+        <div class="control-group">
+          <span class="control-label">Difficulty:</span>
+          <div class="desktop-controls" role="group" aria-label="Difficulty">
+            <button type="button" class="difficulty-btn" data-difficulty="easy" aria-pressed="false">Easy</button>
+            <button type="button" class="difficulty-btn" data-difficulty="medium" aria-pressed="false">Medium</button>
+            <button type="button" class="difficulty-btn active" data-difficulty="hard" aria-pressed="true">Hard</button>
+          </div>
+          <select class="mobile-select" id="difficulty" name="difficulty" aria-label="Difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard" selected>Hard</option>
+          </select>
+        </div>
 
-        <!-- Difficulty -->
-      <!-- Difficulty -->
-<div class="control-group">
-
-  <span class="control-label">Difficulty:</span>
-
-  <!-- Desktop -->
-  <div class="desktop-controls">
-
-    <button
-      type="button"
-      class="difficulty-btn"
-      data-difficulty="easy"
-    >
-      Easy
-    </button>
-
-    <button
-      type="button"
-      class="difficulty-btn"
-      data-difficulty="medium"
-    >
-      Medium
-    </button>
-
-    <button
-      type="button"
-      class="difficulty-btn active"
-      data-difficulty="hard"
-    >
-      Hard
-    </button>
-
-  </div>
-
-  <!-- Mobile -->
-  <select
-    class="mobile-select"
-    id="difficulty"
-    name="difficulty"
-  >
-    <option value="easy">Easy</option>
-    <option value="medium">Medium</option>
-    <option value="hard" selected>Hard</option>
-  </select>
-
-</div>
-
-
-        <!-- Mode -->
-       <div class="control-group">
-
-  <span class="control-label">Mode:</span>
-
-  <!-- Desktop -->
-  <div class="desktop-controls">
-
-    <button
-      type="button"
-      class="mode-btn active"
-      data-mode="timed"
-    >
-      Timed (60s)
-    </button>
-
-    <button
-      type="button"
-      class="mode-btn"
-      data-mode="passage"
-    >
-      Passage
-    </button>
-
-  </div>
-
-  <!-- Mobile -->
-  <select
-    class="mobile-select"
-    id="mode"
-    name="mode"
-  >
-    <option value="timed" selected>Timed (60s)</option>
-    <option value="passage">Passage</option>
-  </select>
-
-</div>
-
+        <div class="control-group">
+          <span class="control-label">Mode:</span>
+          <div class="desktop-controls" role="group" aria-label="Test mode">
+            <button type="button" class="mode-btn active" data-mode="timed" aria-pressed="true">Timed (60s)</button>
+            <button type="button" class="mode-btn" data-mode="passage" aria-pressed="false">Passage</button>
+          </div>
+          <select class="mobile-select" id="mode" name="mode" aria-label="Test mode">
+            <option value="timed" selected>Timed (60s)</option>
+            <option value="passage">Passage</option>
+          </select>
+        </div>
       </div>
-
     </section>
 
-
-    <!-- Typing test -->
-    <section class="typing-test">
-
-      <div
-        class="passage"
-        id="passage"
-        tabindex="0"
-        aria-label="Typing passage"
-      >
-        The archaeological expedition unearthed artifacts that complicated
-        prevailing theories about Bronze Age trade networks. Obsidian from
-        Anatolia, lapis lazuli from Afghanistan, and amber from the Baltic—all
-        discovered in a single Mycenaean tomb—suggested commercial connections
-        far more extensive than previously hypothesized.
+    <section class="typing-test" aria-label="Typing test">
+      <div class="passage" id="passage" tabindex="0" aria-label="Typing passage">
+        Loading passage…
       </div>
-
-
-      <!-- Hidden input used to capture typing -->
       <input
         type="text"
         id="typing-input"
-        aria-label="Type the passage"
+        aria-label="Type the passage here"
         autocomplete="off"
         autocorrect="off"
         autocapitalize="off"
         spellcheck="false"
+        inputmode="text"
       >
-
-
-      <!-- Start overlay -->
       <div class="start-overlay" id="start-overlay">
-
-        <button
-          type="button"
-          id="start-btn"
-          class="start-btn"
-        >
-          Start Typing Test
-        </button>
-
+        <button type="button" id="start-btn" class="start-btn">Start Typing Test</button>
         <p>Or click the text and start typing</p>
-
       </div>
-
+      <p class="load-error" id="load-error" role="alert" hidden>
+        We couldn't load the typing passages. Check that <code>data.json</code> is in the project folder, then refresh the page.
+      </p>
     </section>
 
-
-    <!-- Restart -->
     <div class="actions">
-
-      <button
-        type="button"
-        id="restart-btn"
-        class="restart-btn"
-      >
-        Restart Test ↻
-      </button>
-
+      <button type="button" id="restart-btn" class="restart-btn">Restart Test ↻</button>
     </div>
 
+    <section class="test-results" id="test-results" aria-labelledby="results-title" hidden>
+      <div class="results-icon" id="results-icon" aria-hidden="true">✓</div>
+      <h1 id="results-title" tabindex="-1">Test Complete!</h1>
+      <p id="results-message">Solid run. Keep pushing to beat your high score.</p>
 
-    <!-- Test results -->
-    <section
-      class="test-results"
-      id="test-results"
-      hidden
-    >
-
-     <div class="results-icon" id="results-icon" aria-hidden="true">✓</div>
-
-
-      <h1 id="results-title">
-        Test Complete!
-      </h1>
-
-
-      <p id="results-message">
-        Solid run. Keep pushing to beat your high score.
-      </p>
-
-
-      <!-- Results statistics -->
       <div class="results-stats">
-
         <div class="result-card">
-
           <span>WPM:</span>
-
-          <strong id="result-wpm">
-            0
-          </strong>
-
+          <strong id="result-wpm">0</strong>
         </div>
-
-
         <div class="result-card">
-
           <span>Accuracy:</span>
-
-          <strong id="result-accuracy">
-            100%
-          </strong>
-
+          <strong id="result-accuracy">100%</strong>
         </div>
-
-
         <div class="result-card">
-
           <span>Characters</span>
-
-          <strong>
-            <span id="correct-characters">0</span>/<span
-              id="incorrect-characters"
-            >0</span>
-          </strong>
-
+          <strong class="character-counts"><span id="correct-characters">0</span>/<span id="incorrect-characters">0</span></strong>
         </div>
-
       </div>
 
-
-      <!-- Result action -->
-      <button
-        type="button"
-        id="result-btn"
-        class="result-btn"
-      >
-        Go Again ↻
-      </button>
-
-      <div
-  id="confetti-container"
-  class="confetti-container"
-  aria-hidden="true"
-></div>
-
+      <button type="button" id="result-btn" class="result-btn">Go Again ↻</button>
     </section>
-
   </main>
-</main>
 
-<!-- Confetti animation layer -->
-<div
-  id="confetti-container"
-  class="confetti-container"
-  aria-hidden="true"
-></div>
+  <!-- One global layer so confetti works on both desktop and mobile. -->
+  <div id="confetti-container" class="confetti-container" aria-hidden="true"></div>
 
-<footer class="attribution">
-
-  <!-- Attribution -->
   <footer class="attribution">
-
     Challenge by
-    <a
-      href="https://www.frontendmentor.io?ref=challenge"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Frontend Mentor
-    </a>.
-
-    Coded by
-    <a href="https://github.com/venkitotad">
-      venkitotad
-    </a>.
-
+    <a href="https://www.frontendmentor.io?ref=challenge" target="_blank" rel="noopener noreferrer">Frontend Mentor</a>.
+    Coded by <a href="https://github.com/venkitotad" target="_blank" rel="noopener noreferrer">venkitotad</a>.
   </footer>
 
-
-  <script src="./script.js"></script>
-
+  <script src="./script.js" defer></script>
 </body>
 </html>
